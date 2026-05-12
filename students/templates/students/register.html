@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; font-family: 'Segoe UI', sans-serif; }
+        .card { background-color: #3d9f88; border: 1px solid #1038a5; border-radius: 12px; }
+        .card-header { background: linear-gradient(90deg, #1f6feb, #388bfd); color: white; font-weight: bold; }
+        /* Применяем стили к полям формы Django */
+        #id_username_helptext {
+		display: none;
+	}
+        input { background-color: #0d1117 !important; border: 1px solid #30363d !important; color: white !important; padding: 10px; width: 100%; border-radius: 5px; }
+    </style>
+</head>
+<body class="d-flex align-items-center justify-content-center min-vh-100">
+    <div class="container">
+        <div class="card shadow-lg mx-auto" style="max-width: 400px;">
+            <div class="card-header p-3 text-center">Регистрация</div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'login' %}" class="text-decoration-none text-primary">Уже есть аккаунт? Войти</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

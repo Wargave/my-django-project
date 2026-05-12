@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление студента</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-sm mx-auto" style="max-width: 400px;">
+            <div class="card-header bg-primary text-white text-center">
+                <h5 class="mb-0">Добавление студента</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Имя</label>
+                        <input type="text" name="first_name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Фамилия</label>
+                        <input type="text" name="last_name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Возраст</label>
+                        <input type="number" name="age" class="form-control" value="18" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Группа</label>
+                        <select name="group" class="form-control" required>
+                            <option value="" disabled selected>Выберите группу</option>
+                            {% for group in groups %}
+                                <option value="{{ group.id }}">{{ group.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Кружки:</label>
+                        <div class="border p-2 rounded bg-white" style="max-height: 150px; overflow-y: auto;">
+                            {% for club in clubs %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="clubs" value="{{ club.id }}" id="club_{{ club.id }}">
+                                    <label class="form-check-label" for="club_{{ club.id }}">
+                                        {{ club.name }}
+                                    </label>
+                                </div>
+                            {% empty %}
+                                <p class="text-muted small">Нет доступных кружков.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Фото студента</label>
+                        <input type="file" name="photo" class="form-control">
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                        <a href="{% url 'student_list' %}" class="btn btn-link text-secondary">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
