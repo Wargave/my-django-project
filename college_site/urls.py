@@ -7,7 +7,7 @@ from students import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('students.urls')),
+    path('students/', include('students.urls')),
     path("register/", views.register, name="register"),
     path("login/", auth_views.LoginView.as_view(template_name="students/login.html"), name="login"),
     path("logout/", auth_views.LogoutView.as_view(next_page="login"), name="logout"),
