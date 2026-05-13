@@ -9,8 +9,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.student_list, name='student_list'),
     path("register/", views.register, name="register"),
-    path("login/", auth_views.LoginView.as_view(template_name="students/login.html"), name="login"),
-    path("logout/", auth_views.LogoutView.as_view(next_page="login"), name="logout"),
+    
+    # Рекомендуется использовать accounts/login, чтобы совпадало со стандартами Django
+    path("accounts/login/", auth_views.LoginView.as_view(template_name="students/login.html"), name="login"),
+    path("accounts/logout/", auth_views.LogoutView.as_view(next_page="login"), name="logout"),
+    
+    # Или можно просто подключить все стандартные пути (login, logout, password_reset) одной строкой:
+    # path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
