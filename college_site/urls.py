@@ -7,7 +7,7 @@ from students import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.student_list, name='student_list'),
+    path('students/', include('students.urls')),
     path("register/", views.register, name="register"),
     
     # Рекомендуется использовать accounts/login, чтобы совпадало со стандартами Django
